@@ -75,8 +75,6 @@ This system provides two distinct user roles:
 └─────────────────────────────────────────┘
 ```
 
----
-
 ## JWT Authentication Flow
 
 1. User submits email + password via React login form
@@ -205,35 +203,6 @@ Frontend runs at: `http://localhost:3000`
 
 ---
 
-## GitHub Push Commands
-
-```bash
-git init
-git add .
-git commit -m "Initial Commit — Employee Management System"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/employee-management-system.git
-git push -u origin main
-```
-
----
-
-## Key Interview Answers
-
-**Q: How does frontend talk to backend?**
-> React sends HTTP requests using Axios to Spring Boot REST API endpoints. For example, Admin creates a task → React sends `POST /api/tasks` with JSON → Spring Boot saves to MySQL → returns success response → React updates UI without page reload.
-
-**Q: How is security implemented?**
-> Spring Security with JWT. User logs in → BCrypt validates password → JWT signed with server-side secret → React sends it as `Authorization: Bearer <token>` → `JwtAuthFilter` validates on every request.
-
-**Q: Can users tamper with their JWT role?**
-> No. JWT is signed with a server-side secret key. If anyone modifies the token, the signature breaks and Spring Security rejects it with 401 Unauthorized.
-
-**Q: What about scalability?**
-> Since JWT is stateless, no sessions are stored on the server. Spring Boot can handle many concurrent users. HikariCP connection pooling manages DB connections efficiently.
-
----
-
 ## Future Improvements
 
 - Real-time notifications via WebSockets (employees get instant alerts on task assignment)
@@ -244,23 +213,6 @@ git push -u origin main
 - Pagination for large task lists
 - Task comments and activity log
 - Admin analytics with date range filters
-
----
-
-## Deployment Guide
-
-**Frontend (Vercel):**
-```bash
-cd frontend
-npm run build
-# Upload dist/ to Vercel or connect GitHub repo
-```
-
-**Backend (Render / Railway):**
-1. Create a MySQL instance on Railway
-2. Update `application.properties` with cloud DB URL
-3. Build: `mvn clean package -DskipTests`
-4. Deploy the generated `target/*.jar` to Render
 
 ---
 
