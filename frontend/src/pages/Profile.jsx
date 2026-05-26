@@ -1,5 +1,5 @@
-import { useAuth } from '../../context/AuthContext'
-import DashboardLayout from '../../layouts/DashboardLayout'
+import { useAuth } from '../context/AuthContext'
+import DashboardLayout from '../layouts/DashboardLayout'
 import { User, Mail, Shield, Calendar, Lock, Info } from 'lucide-react'
 import { format } from 'date-fns'
 
@@ -9,9 +9,9 @@ const Profile = () => {
   const isAdmin = user?.role === 'ADMIN'
 
   const infoItems = [
-    { icon: User, label: 'Full Name', value: user?.name },
-    { icon: Mail, label: 'Email Address', value: user?.email },
-    { icon: Shield, label: 'Role', value: user?.role },
+    { icon: User, label: 'Full Name', value: user?.name || 'Loading...' },
+    { icon: Mail, label: 'Email Address', value: user?.email || 'Loading...' },
+    { icon: Shield, label: 'Role', value: user?.role || 'Loading...' },
     { icon: Lock, label: 'Authentication', value: 'JWT / Spring Security' },
   ]
 
@@ -29,11 +29,11 @@ const Profile = () => {
           <div className="flex items-center gap-5 pb-6 border-b border-surface-border/50">
             <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-bold text-obsidian-950 flex-shrink-0"
               style={{ background: 'linear-gradient(135deg, #00f5ff, #9b5de5)' }}>
-              {user?.name?.charAt(0)?.toUpperCase()}
+              {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-white">{user?.name}</h2>
-              <p className="text-obsidian-400 text-sm mt-0.5">{user?.email}</p>
+              <h2 className="text-2xl font-bold text-white">{user?.name || 'User'}</h2>
+              <p className="text-obsidian-400 text-sm mt-0.5">{user?.email || 'Fetching account details...'}</p>
               <div className="flex items-center gap-2 mt-2">
                 <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
                   isAdmin
@@ -41,7 +41,7 @@ const Profile = () => {
                     : 'bg-purple-500/10 text-purple-300 border border-purple-500/20'
                 }`}>
                   <Shield size={11} />
-                  {user?.role}
+                  {user?.role || 'USER'}
                 </div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-300 border border-green-500/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
