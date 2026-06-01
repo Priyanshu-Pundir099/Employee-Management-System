@@ -8,7 +8,8 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.2.3</version>
-        <relativePath/> </parent>
+        <relativePath/>
+    </parent>
 
     <groupId>com.empms</groupId>
     <artifactId>employee-management-system</artifactId>
